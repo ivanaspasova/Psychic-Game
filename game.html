@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Psychic Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="game.css">
+
+</head>
+
+<body>
+    <h1>The Psychic Game </h1>
+    <p id="guessletter">Guess what letter I am thinking of </p>
+    <p>Wins: <span id="wins"> </span></p>
+    <p>Losses: <span id="losses"></span> </p>
+    <p> Guesses Left: <span id="guessesleft"></span></p>
+    <p>Your Guesses so far: <span id="yourguesses"></span> </p>
+
+    <script>
+        var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        var randomNumber = Math.floor(Math.random() * letters.length) + 1;
+        var computerChoice = letters[randomNumber];
+        console.log(computerChoice);
+
+        var trackWins = 0;
+        var trackLosses = 0;
+        var guessesLeft = 5;
+        var guessesSoFar = []
+
+        document.onkeyup = function(event) {
+            var userChoice = event.key;
+            guessesSoFar.push(userChoice);
+            document.getElementById("yourguesses").innerText = guessesSoFar;
+            if (computerChoice === userChoice) {
+                trackWins = trackWins + 1;
+                //trackWins++;
+                document.getElementById("wins").innerText = trackWins;
+                randomNumber = Math.floor(Math.random() * letters.length) + 1;
+                guessesLeft = 5;
+                guessesSoFar = [];
+            } else {
+                guessesLeft = guessesLeft - 1;
+                document.getElementById("guessesleft").innerText = guessesLeft;
+                //guessesLeft--;
+                if (guessesLeft === 0) {
+                    trackLosses++;
+                    guessesLeft = 5;
+                    randomNumber = Math.floor(Math.random() * letters.length) + 1;
+                    document.getElementById("losses").innerText = trackLosses;
+                    guessesSoFar = [];
+                }
+            }
+
+        }
+    </script>
+
+
+</body>
+
+</html>
