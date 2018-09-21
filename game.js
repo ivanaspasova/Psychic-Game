@@ -14,7 +14,7 @@ document.onkeyup = function(event) {
     document.getElementById("yourguesses").innerText = guessesSoFar;
     if (computerChoice === userChoice) {
         trackWins = trackWins + 1;
-        //trackWins++;
+
         document.getElementById("wins").innerText = trackWins;
         randomNumber = Math.floor(Math.random() * letters.length) + 1;
         guessesLeft = 5;
@@ -22,7 +22,7 @@ document.onkeyup = function(event) {
     } else {
         guessesLeft = guessesLeft - 1;
         document.getElementById("guessesleft").innerText = guessesLeft;
-        //guessesLeft--;
+
         if (guessesLeft === 0) {
             trackLosses++;
             guessesLeft = 5;
